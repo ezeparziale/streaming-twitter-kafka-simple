@@ -1,4 +1,3 @@
-# from tweepy import StreamListener
 from tweepy import Stream
 from kafka import KafkaProducer
 import config
