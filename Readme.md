@@ -2,7 +2,6 @@
 
 Demo de streaming de tuits usando la api de Twitter y enviando los tuis a kafka.
 
-
 &nbsp;
 
 ## Requerimientos
@@ -37,7 +36,6 @@ pip install -r requirements.txt
 
 ## Ejecución
 
-&nbsp;
 1. Clonar el repositorio
 
 ```
