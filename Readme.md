@@ -42,15 +42,11 @@ pip install -r requirements.txt
 git clone https://github.com/ezeparziale/streaming-twitter-kafka-simple.git .
 ```
 
-&nbsp;
-
 2. Ejecutar el archivo docker-compose.yaml
 
 ```
 docker-compose -f "docker-compose.yaml" up -d
 ```
-
-&nbsp;
 
 3. Configurar los parametros
    
@@ -77,14 +73,10 @@ LANGUAGES = ['en','es']
 &nbsp;
 
 4. Ejecutar el archivo **new_topic.py** para crear el topico en kafka.
-
-&nbsp;
    
 5. Ejecutar el archivo **producer.py** para correr el producer de kafka.
    
 Este archivo va a conectarse a twitter y leer los tuits con los parametros establecidos y los va a disponibilizar en el topico.
-
-&nbsp;
 
 6. Ejecutar el archivo **consumer.py** para ir leyendo los datos del topico.
 
