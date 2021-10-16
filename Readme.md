@@ -3,7 +3,6 @@
 Demo de streaming de tuits usando la api de Twitter y enviando los tuis a kafka.
 
 &nbsp;
-
 ## Requerimientos
 
 * Docker
@@ -69,8 +68,6 @@ TRACKS = ['#argentina','argentina','boca','river','ronaldo','messi','psg','barce
 LOCATION = [-126.2,-56.0,22.3,58.9]
 LANGUAGES = ['en','es']
 ```
-
-&nbsp;
 
 4. Ejecutar el archivo **new_topic.py** para crear el topico en kafka.
    
