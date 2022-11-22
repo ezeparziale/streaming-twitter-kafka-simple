@@ -1,9 +1,9 @@
 from kafka import KafkaConsumer
 import json
-import config
+from config import settings
 
 def main():             
-    consumer = KafkaConsumer(config.TOPIC_NAME)
+    consumer = KafkaConsumer(settings.TOPIC_NAME)
     for msg in consumer:
         output = []
         output.append(json.loads(msg.value))
