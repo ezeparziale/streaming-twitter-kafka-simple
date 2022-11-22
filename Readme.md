@@ -1,80 +1,57 @@
-# 🐦 Streaming twitter con kafka simple con producer y consumer
+# 🐦 Streaming tweets with kafka simple
 
-Demo de streaming de tuits usando la api de Twitter y enviando los tuis a kafka.
+Demo of streaming tweets from twitter with simple producer and consumer
 
-&nbsp;
-## 📦 Requerimientos
+- [X] Kafka topic
+- [X] Kafka producer
+- [X] Kafka consumer
 
-* Docker
+## :floppy_disk: Installation
 
-```
-https://www.docker.com/get-started
-```
-
-* Acceso a la API de Twitter
-
-Para generar la app developer y obtener las key
-
-```url
-https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api
+```bash
+python -m venv env
 ```
 
-
-* Git
-
-```url
-https://git-scm.com
+```bash
+. env/scripts/activate
 ```
 
-* Instalar los requerimientos de python:
+```bash
+python -m pip install --upgrade pip
 ```
+
+```bash
 pip install -r requirements.txt
 ```
 
-&nbsp;
+## :wrench: Config
 
-## 🏃‍♂️ Ejecución
+Create `.env` file. Check the example `.env.example`
 
-1. Clonar el repositorio
+Create your twitter app to get credentils:
 
+```http
+https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api
 ```
-git clone https://github.com/ezeparziale/streaming-twitter-kafka-simple.git .
-```
 
-2. Ejecutar el archivo docker-compose.yaml
+## 🏃‍♂️ Run
 
-```
+1. Run docker compose to initialize the kakfa server, mongo db and mongo express.
+
+```console
 docker-compose -f "docker-compose.yaml" up -d
 ```
 
-3. Configurar los parametros
-   
-* Configurar el archivo *config.py* seteando la variable **TOPIC_NAME** con el valor del topico que queremos crear
-```
-TOPIC_NAME = 'twitter'
-```
+2. Config your search paramaters in `config.py`:
 
-* Configurar los token de la api de twitter
-```
-API_KEY = 'INGRESAR_LA_API_KEY'
-API_SECRET_KEY = 'INGRESAR_LA_API_SECRET_KEY'
-ACCESS_TOKEN = 'INGRESAR_EL_ACCESS_TOKEN'
-ACCESS_TOKEN_SECRET = 'INGRESAR_EL_ACCESS_TOKEN_SECRET'
-```
-
-* Configurar las variables de busqueda:
-```
-TRACKS = ['#argentina','argentina','boca','river','ronaldo','messi','psg','barcelona','manchesterd']
+```python
+TRACKS = ["#argentina", "argentina", "boca", "river", "ronaldo", "messi", "psg", "barcelona", "manchester"]
 LOCATION = [-126.2,-56.0,22.3,58.9]
-LANGUAGES = ['en','es']
+LANGUAGES = ["en", "es"]
 ```
 
-4. Ejecutar el archivo **new_topic.py** para crear el topico en kafka.
-   
-5. Ejecutar el archivo **producer.py** para correr el producer de kafka.
-   
-Este archivo va a conectarse a twitter y leer los tuits con los parametros establecidos y los va a disponibilizar en el topico.
+3. Run **new_topic.py** for create the kafka topic.
 
-6. Ejecutar el archivo **consumer.py** para ir leyendo los datos del topico.
+4. Run **producer.py** for read tweets and publish in kakfa topic.
 
-Este archivo va a estar conectandose al topico, leer los datos e imprimirlos por pantalla.
+5. Run **consumer.py** for read tweets from the topic in kafka.
