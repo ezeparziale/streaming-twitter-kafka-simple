@@ -1,8 +1,8 @@
-version: '3.8'
+version: "3.9"
 services:
 
   zoo-1:
-    image: confluentinc/cp-zookeeper:6.2.1
+    image: confluentinc/cp-zookeeper:7.3.0
     container_name: zoo-1
     hostname: zoo-1
     ports:
@@ -10,14 +10,14 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    volumes:
-      - ./volume/zookeeper/data:/data
-      - ./volume/zookeeper/datalog:/datalog
+    # volumes:
+    #   - ./volume/zookeeper/data:/data
+    #   - ./volume/zookeeper/datalog:/datalog
     networks:
-     - kakfa-net
+      - kafka-net
 
   kafka-1:
-    image: confluentinc/cp-kafka:6.2.1
+    image: confluentinc/cp-kafka:7.3.0
     container_name: kafka-1
     hostname: kafka-1
     ports:
@@ -29,12 +29,27 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    volumes:
-      - ./volume/kafka/data:/var/lib/kafka/data
+    # volumes:
+    #   - ./volume/kafka/data:/var/lib/kafka/data
     depends_on:
       - zoo-1
     networks:
-     - kakfa-net
+      - kafka-net
+
+  mongodb-1:
+    image: mongo:6.0.3
+    container_name: mongodb-1
+    hostname: mongodb1
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    networks:
+      - kafka-net
+    # volumes:
+    #   - ./volume/mongo-data:/data/db
+    #   - ./volume/mongo-config:/data/configdb
 
 networks:
-  kakfa-net:
+  kafka-net:
